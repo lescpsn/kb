@@ -1,7 +1,8 @@
 ## KBPass
 
 Command line password manager using the keybase filesystem for
-password storage.
+password storage. Use it for passwords you have to type into your
+terminal, or just as an encrypted key value store.
 
 #### Installation
 
@@ -18,23 +19,4 @@ kbpass init
 ```
 
 to build a keystore in your personal private keybase folder.
-
-Save passwords like
-
-```
-kbpass save github
-```
-
-Retrieve passwords with
-
-```
-kbpass get github
-```
-
-Share passwords with
-
-```
-keybase share github jdsallinger
-```
-
 
