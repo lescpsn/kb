@@ -1,7 +1,12 @@
 
-kb is a command line password manager using the keybase filesystem for
-password storage. Use it for passwords you have to type into your
-terminal, or just as an encrypted key value store.
+**kb** is a command line tool for saving passwords in keybase.
+
+
+#### Why
+Although I use a password manager, there are random secrets I still
+have to type into terminals and available tools use gpg to encrypt/decrypt
+which is a pain.
+
 
 #### Installation
 First, install and set up [keybase](https://keybase.io/).
@@ -13,7 +18,7 @@ go get github.com/kingishb/kb
 ```
 $ kb
 
-An encrypted key, value store for saving and loading secrets.
+An key, value store for saving and loading secrets in keybase.
 
 Usage:
   kb COMMAND
@@ -24,7 +29,7 @@ Commands:
   get <key>        loads value of a key
   generate <key>   auto generates a 12 character random value
   list             lists all available keys
-  search <key>     lists all keys matching containing partial regex <key>
+  search <regex>   lists all keys matching regex
 
 Example:
   - save key github.com

@@ -16,7 +16,7 @@ const (
 func menu() {
 
 	menu := `
-An encrypted key, value store for saving and loading secrets.
+An key, value store for saving and loading secrets in keybase.
 
 Usage:
   kb COMMAND
@@ -27,6 +27,7 @@ Commands:
   get <key>        loads value of a key
   generate <key>   auto generates a 12 character random value
   list             lists all available keys
+  search <regex>   lists all keys matching regex
 
 Example:
   - save key github.com
@@ -48,9 +49,13 @@ func list() error {
 	}
 
 	files, _ := ioutil.ReadDir(c)
+	fmt.Printf("\nAvalable keys: \n")
 	for _, f := range files {
-		fmt.Println(f.Name())
+		fmt.Printf("\t%s", f.Name())
 	}
+	fmt.Println()
+
+	return nil
 }
 
 func user() (string, error) {
