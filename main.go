@@ -25,9 +25,17 @@ func user() (string, error) {
 	return string(s), nil
 }
 
-// func credstore() string
+func credstore() (string, error) {
+	u, err := user()
 
-func createKeystore() error {
+	if err != nil {
+		return "", err
+	}
+
+	return fmt.Sprintf(prefix, u), nil
+}
+
+func create() error {
 	home := os.Getenv("HOME")
 
 	// read user's keybase name
@@ -39,7 +47,7 @@ func createKeystore() error {
 	// save user's keybase username in ~/.kbpass
 	// for accessing private keybase folder later
 	dir := strings.Join([]string{home, "/.kbpass"}, "")
-	err := os.MkdirAll(dir, 0700)
+	_ = os.Mkdir(dir, 0700)
 
 	if err != nil {
 		return err
@@ -57,11 +65,7 @@ func createKeystore() error {
 	// make keystore in keybase private folder
 	path := fmt.Sprintf(prefix, f)
 	fmt.Printf("\tBuilding keystore in %s\n\n", path)
-	err = os.Mkdir(path, 0700)
-
-	if err != nil {
-		return err
-	}
+	_ = os.Mkdir(path, 0700)
 
 	return nil
 
@@ -72,7 +76,7 @@ func main() {
 
 	switch args[0] {
 	case "init":
-		err := createKeystore()
+		err := create()
 		if err != nil {
 			log.Fatal(err)
 		}
