@@ -31,8 +31,9 @@ Commands:
   save <key>       save a key
   get <key>        loads value of a key
   generate <key>   auto generates a 12 character random value
-  list             lists all available keys
   search <regex>   lists all keys matching regex
+  ls               lists all available keys
+  rm <key>         removes a key
 
 Example:
   - save key github.com
@@ -44,6 +45,22 @@ Example:
 	`
 
 	fmt.Printf(menu)
+}
+
+func rm(key string) error {
+	c, err := credstore()
+
+	if err != nil {
+		return err
+	}
+
+	err = os.Remove(strings.Join([]string{c, "/", key}, ""))
+
+	if err != nil {
+		return err
+	}
+
+	return nil
 }
 
 func list() error {
@@ -215,8 +232,7 @@ func main() {
 				fmt.Println("Please provide a key to save.")
 				return
 			}
-
-			fmt.Print("Value: ")
+			fmt.Print("\n\tEnter Value: ")
 			bytePassword, err := terminal.ReadPassword(int(syscall.Stdin))
 			if err != nil {
 				log.Fatal(err)
@@ -231,7 +247,7 @@ func main() {
 				log.Fatal(err)
 			}
 
-			fmt.Println("Saved.")
+			fmt.Printf("\n")
 
 		case "get":
 			if len(args) < 2 {
@@ -247,7 +263,7 @@ func main() {
 			}
 
 			fmt.Printf("\n\t%s\n", val)
-		case "list":
+		case "ls":
 
 			err := list()
 
@@ -275,6 +291,18 @@ func main() {
 			}
 
 			err := generate(args[1])
+			if err != nil {
+				log.Fatal(err)
+			}
+
+		case "rm":
+
+			if len(args) < 2 {
+				fmt.Println("please provide a key to remove.")
+				return
+			}
+
+			err := rm(args[1])
 			if err != nil {
 				log.Fatal(err)
 			}
