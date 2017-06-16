@@ -2,11 +2,16 @@ package main
 
 import (
 	"bufio"
+	"crypto/rand"
+	"encoding/base64"
 	"fmt"
 	"io/ioutil"
 	"log"
 	"os"
 	"strings"
+	"syscall"
+
+	"golang.org/x/crypto/ssh/terminal"
 )
 
 const (
@@ -56,6 +61,49 @@ func list() error {
 	fmt.Println()
 
 	return nil
+}
+
+func search(s string) error {
+	c, err := credstore()
+
+	if err != nil {
+		return err
+	}
+
+	files, _ := ioutil.ReadDir(c)
+	fmt.Printf("\nAvalable keys: \n")
+	for _, f := range files {
+
+		if strings.Contains(f.Name(), s) {
+			fmt.Printf("\t%s", f.Name())
+		}
+	}
+	fmt.Println()
+
+	return nil
+
+}
+
+func generate(key string) error {
+	c := 12
+	b := make([]byte, c)
+	_, err := rand.Read(b)
+	if err != nil {
+		return err
+	}
+
+	val := base64.StdEncoding.EncodeToString(b)
+
+	err = save(key, val)
+
+	if err != nil {
+		return err
+	}
+
+	fmt.Printf("\n\tSaving %s", key)
+
+	return nil
+
 }
 
 func user() (string, error) {
@@ -165,14 +213,18 @@ func main() {
 
 			if len(args) < 2 {
 				fmt.Println("Please provide a key to save.")
+				return
 			}
 
-			reader := bufio.NewReader(os.Stdin)
 			fmt.Print("Value: ")
-			text, _ := reader.ReadString('\n')
-			val := strings.Trim(strings.Trim(text, "\n"), " ")
+			bytePassword, err := terminal.ReadPassword(int(syscall.Stdin))
+			if err != nil {
+				log.Fatal(err)
+			}
+			password := string(bytePassword)
+			val := strings.Trim(strings.Trim(password, "\n"), " ")
 
-			err := save(args[1], val)
+			err = save(args[1], val)
 
 			if err != nil {
 				fmt.Println("Saving failed")
@@ -184,6 +236,7 @@ func main() {
 		case "get":
 			if len(args) < 2 {
 				fmt.Println("Please provide a key to retrieve")
+				return
 			}
 
 			val, err := get(args[1])
@@ -193,11 +246,35 @@ func main() {
 				return
 			}
 
-			fmt.Printf("%s:\n\t%s\n", args[1], val)
+			fmt.Printf("\n\t%s\n", val)
 		case "list":
 
 			err := list()
 
+			if err != nil {
+				log.Fatal(err)
+			}
+
+		case "search":
+
+			if len(args) < 2 {
+				fmt.Println("please provide a key to search.")
+				return
+			}
+
+			err := search(args[1])
+
+			if err != nil {
+				log.Fatal(err)
+			}
+		case "generate":
+
+			if len(args) < 2 {
+				fmt.Println("please provide a key to search.")
+				return
+			}
+
+			err := generate(args[1])
 			if err != nil {
 				log.Fatal(err)
 			}
