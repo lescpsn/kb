@@ -4,7 +4,7 @@
 
 #### Why
 Although I use a password manager, there are random secrets I still
-have to type into terminals and available tools I found for storing secrets
+have to type into terminals. Available tools I found for storing secrets
 via command line use gpg to encrypt/decrypt which is a pain.
 
 
