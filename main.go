@@ -207,7 +207,7 @@ func main() {
 			if err != nil {
 				log.Fatal(err)
 			}
-			fmt.Println("Done! use 'kbpass save <identifier> <password>' to save your first password. ")
+			fmt.Println("Done! Type kb to see available commands.")
 
 		case "save":
 

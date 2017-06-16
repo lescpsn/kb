@@ -7,11 +7,14 @@ I use a password manager, but there are often random secrets I still
 have to type into terminals. Available tools I found for storing secrets
 via command line use gpg to encrypt/decrypt which is a pain.
 
+This is really easy
+
 
 #### Installation
 First, install and set up [keybase](https://keybase.io/).
 ```
 go get github.com/kingishb/kb
+kb init
 ```
 
 #### Usage
