@@ -16,7 +16,7 @@ import (
 )
 
 const (
-	prefix = "/keybase/private/%s/credstore"
+	prefix = "/keybase/private/%s/.kb"
 )
 
 func menu() {
@@ -157,7 +157,7 @@ func generate(key string) error {
 
 func user() (string, error) {
 	home := os.Getenv("HOME")
-	u := strings.Join([]string{home, "/.kbpass/username"}, "")
+	u := strings.Join([]string{home, "/.kb/username"}, "")
 	s, err := ioutil.ReadFile(u)
 
 	if err != nil {
@@ -234,14 +234,14 @@ func create() error {
 	text, _ := reader.ReadString('\n')
 	f := strings.Trim(strings.Trim(text, "\n"), " ")
 
-	// save user's keybase username in ~/.kbpass
+	// save user's keybase username in ~/.kb
 	// for accessing private keybase folder later
-	dir := strings.Join([]string{home, "/.kbpass"}, "")
+	dir := strings.Join([]string{home, "/.kb"}, "")
 	_ = os.Mkdir(dir, 0700)
 
 	file := strings.Join([]string{dir, "/username"}, "")
 
-	fmt.Println("\n\tWriting keybase username to ~/.kbpass/username")
+	fmt.Println("\n\tWriting keybase username to ~/.kb/username")
 	err := ioutil.WriteFile(file, []byte(f), 0600)
 
 	if err != nil {
