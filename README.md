@@ -3,8 +3,8 @@
 
 #### How it works
 
-It encrypts passwords with your keybase public key using the `keybase`
-cli, saving the ciphertext in `/keybase/private/<your username>/.kb/<key>`.
+It encrypts passwords with your keybase public key using the [keybase
+cli](https://keybase.io/docs/command_line), saving the ciphertext in `/keybase/private/<your username>/.kb/<key>`.
 
 #### Installation
 First, install and set up [keybase](https://keybase.io/). Then,
