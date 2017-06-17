@@ -31,7 +31,7 @@ Commands:
   init             creates a keystore
   set <key>        save a key
   get <key>        loads value of a key
-  generate <key>   generates & saves 12 character 
+  generate <key>   generates & saves 12 character
                    random value for a key
   search <string>  lists all keys with substring
   ls               lists all available keys
@@ -150,7 +150,7 @@ func generate(key string) error {
 		return err
 	}
 
-	fmt.Printf("\n\tSaving %s", key)
+	fmt.Printf("\n\tSaving %s\n", key)
 
 	return nil
 
