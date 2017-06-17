@@ -7,7 +7,7 @@ It encrypts passwords with your keybase public key using the [keybase
 cli](https://keybase.io/docs/command_line), saving the ciphertext in `/keybase/private/<your username>/.kb/<key>`.
 
 #### Installation
-First, install and set up [keybase](https://keybase.io/) (and [go](https://golang.org/doc/install)). Then,
+Install [keybase](https://keybase.io/) and [go](https://golang.org/doc/install)) Then,
 ```
 go get github.com/kingishb/kb
 kb init
