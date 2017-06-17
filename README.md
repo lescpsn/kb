@@ -3,12 +3,18 @@
 
 
 #### Why
-I use a password manager, but there are often random secrets I still
-have to type into terminals. Available tools I found for storing secrets
-via command line use gpg to encrypt/decrypt which is a pain.
+I generally use a password manager, but there are often random secrets I still
+have to type into terminals, and it's annoying to switch windows and remember
+what to search for. Available tools I found for storing secrets
+use gpg to encrypt/decrypt which is a pain, especially if you use
+more than one machine.
 
 This is really easy.
 
+#### How it works
+
+It encrypts passwords with your keybase public key using the `keybase`
+command line tool, saving the ciphertext in `/keybase/private/<your username>/credstore`.
 
 #### Installation
 First, install and set up [keybase](https://keybase.io/).
