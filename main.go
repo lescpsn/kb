@@ -22,7 +22,6 @@ const (
 func menu() {
 
 	menu := `
-A key, value store for saving and loading secrets in keybase.
 
 Usage:
   kb COMMAND
