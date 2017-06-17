@@ -35,7 +35,7 @@ Commands:
   set <key>        save a key
   get <key>        loads value of a key
   generate <key>   auto generates a 12 character random value
-  search <regex>   lists all keys matching regex
+  search <string>  lists all keys with substring
   ls               lists all available keys
   rm <key>         removes a key
 
