@@ -4,8 +4,7 @@
 
 #### Why
 I generally use a password manager, but there are often random secrets I still
-have to type into terminals, and it's annoying to switch windows and remember
-what to search for. Available tools I found for storing secrets
+have to type into terminals. Available tools I found for storing secrets
 use gpg to encrypt/decrypt which is a pain, especially if you use
 more than one machine.
 
