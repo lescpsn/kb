@@ -5,7 +5,7 @@
 #### Why
 I generally use a password manager, but there are often random secrets I still
 have to type into terminals. Available tools I found for storing secrets
-use gpg to encrypt/decrypt which is a pain, especially if you use
+use gpg keyrings to encrypt/decrypt which is a pain, especially if you use
 more than one machine.
 
 This is really easy.
