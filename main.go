@@ -31,19 +31,19 @@ Commands:
   init             creates a keystore
   set <key>        save a key
   get <key>        loads value of a key
-  generate <key>   auto generates a 12 character random value
-  search <string>  lists all keys with matching substring
+  generate <key>   generates & saves 12 character 
+                   random value for a key
+  search <string>  lists all keys with substring
   ls               lists all available keys
   rm <key>         removes a key
 
 Example:
-  - set key github.com
+  - set the key github.com
       kb set github.com
 
-  - get key github.com
+  - get value of the key github.com
       kb get github.com
-
-	`
+`
 
 	fmt.Printf(menu)
 }
