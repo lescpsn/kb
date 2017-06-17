@@ -22,7 +22,7 @@ kb init
 #### Usage
 ```
 $ kb
-An key, value store for saving and loading secrets in keybase.
+A key, value store for saving and loading secrets in keybase.
 
 Usage:
   kb COMMAND
