@@ -40,8 +40,8 @@ Commands:
   rm <key>         removes a key
 
 Example:
-  - save key github.com
-      kb save github.com
+  - set key github.com
+      kb set github.com
 
   - get key github.com
       kb get github.com
