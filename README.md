@@ -27,7 +27,7 @@ Usage:
 
 Commands:
   init             creates a keystore
-  save <key>       save a key
+  set <key>        save a key
   get <key>        loads value of a key
   generate <key>   auto generates a 12 character random value
   search <regex>   lists all keys matching regex

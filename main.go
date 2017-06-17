@@ -8,6 +8,7 @@ import (
 	"io/ioutil"
 	"log"
 	"os"
+	"os/exec"
 	"strings"
 	"syscall"
 
@@ -28,7 +29,7 @@ Usage:
 
 Commands:
   init             creates a keystore
-  save <key>       save a key
+  set <key>        save a key
   get <key>        loads value of a key
   generate <key>   auto generates a 12 character random value
   search <regex>   lists all keys matching regex
@@ -36,8 +37,8 @@ Commands:
   rm <key>         removes a key
 
 Example:
-  - save key github.com
-      kb save github.com
+  - set key github.com
+      kb set github.com
 
   - get key github.com
       kb get github.com
@@ -78,6 +79,38 @@ func list() error {
 	fmt.Println()
 
 	return nil
+}
+
+func encrypt(s string) ([]byte, error) {
+
+	u, err := user()
+	if err != nil {
+		return []byte(""), err
+	}
+
+	args := []string{"encrypt", "-m", s, u}
+
+	out, err := exec.Command("keybase", args...).Output()
+
+	if err != nil {
+		return []byte(""), err
+	}
+
+	return out, nil
+}
+
+func decrypt(b []byte) (string, error) {
+
+	msg := fmt.Sprintf("%s", string(b))
+	s := strings.Replace(msg, "\n", "", -1)
+	args := []string{"decrypt", "-m", s}
+	out, err := exec.Command("keybase", args...).Output()
+
+	if err != nil {
+		return "", err
+	}
+
+	return string(out), nil
 }
 
 func search(s string) error {
@@ -152,8 +185,14 @@ func save(key, val string) error {
 		return err
 	}
 
+	ctxt, err := encrypt(val)
+
+	if err != nil {
+		return err
+	}
+
 	path := strings.Join([]string{c, "/", key}, "")
-	err = ioutil.WriteFile(path, []byte(val), 0600)
+	err = ioutil.WriteFile(path, ctxt, 0600)
 
 	if err != nil {
 		return err
@@ -178,7 +217,13 @@ func get(key string) (string, error) {
 		return "", err
 	}
 
-	return string(b), nil
+	txt, err := decrypt(b)
+
+	if err != nil {
+		return "", err
+	}
+
+	return txt, nil
 }
 
 func create() error {
@@ -226,7 +271,7 @@ func main() {
 			}
 			fmt.Println("Done! Type kb to see available commands.")
 
-		case "save":
+		case "set":
 
 			if len(args) < 2 {
 				fmt.Println("Please provide a key to save.")
@@ -258,7 +303,7 @@ func main() {
 			val, err := get(args[1])
 
 			if err != nil {
-				fmt.Println("Invalid key!")
+				fmt.Println(err)
 				return
 			}
 
