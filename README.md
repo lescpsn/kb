@@ -1,8 +1,6 @@
 
 **kb** is a command line tool for saving passwords in keybase.
 
-![](kb.gif)
-
 
 #### Why
 I use a password manager, but there are often random secrets I still
