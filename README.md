@@ -1,19 +1,10 @@
 
 **kb** is a command line tool for saving passwords in keybase.
 
-
-#### Why
-I generally use a password manager, but there are often random secrets I still
-have to type into terminals. Available tools I found for storing secrets
-use gpg keyrings to encrypt/decrypt which is a pain, especially if you use
-more than one machine.
-
-This is really easy.
-
 #### How it works
 
 It encrypts passwords with your keybase public key using the `keybase`
-command line tool, saving the ciphertext in `/keybase/private/<your username>/credstore/<key>`.
+cli, saving the ciphertext in `/keybase/private/<your username>/credstore/<key>`.
 
 #### Installation
 First, install and set up [keybase](https://keybase.io/). Then,
