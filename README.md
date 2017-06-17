@@ -13,7 +13,7 @@ This is really easy.
 #### How it works
 
 It encrypts passwords with your keybase public key using the `keybase`
-command line tool, saving the ciphertext in `/keybase/private/<your username>/credstore`.
+command line tool, saving the ciphertext in `/keybase/private/<your username>/credstore/<key>`.
 
 #### Installation
 First, install and set up [keybase](https://keybase.io/).
