@@ -331,7 +331,7 @@ func main() {
 		case "generate":
 
 			if len(args) < 2 {
-				fmt.Println("please provide a key to search.")
+				fmt.Println("please provide a key to create.")
 				return
 			}
 
