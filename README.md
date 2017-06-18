@@ -1,5 +1,5 @@
 
-**kb** is a command line tool for saving passwords in keybase.
+**kb** is a command line tool for saving passwords with keybase.
 
 #### How it works
 
