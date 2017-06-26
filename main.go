@@ -1,3 +1,25 @@
+/*
+kb is a little command line tool for saving passwords. It calls out to
+ keybase to generate ciphertext for your password and saves it in a folder.
+After running
+
+	kb init
+
+this will save your keybase username in $HOME/.kb/username
+and will create a password store in /keybase/private/<your username>/.kb
+
+when you set a key via
+
+	kb set <keyname>
+
+it will prompt you for a password, encrypt it with your public key,
+and save the ciphertext in /keybase/private/<your username>/.kb/<keyname>
+
+	kb get <keyname>
+
+pipes the ciphertext to the keybase cli and returns the plaintext of the
+key value.
+*/
 package main
 
 import (
