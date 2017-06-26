@@ -21,9 +21,7 @@ const (
 
 func menu() {
 
-	menu := `
-
-Usage:
+	menu := `Usage:
   kb COMMAND
 
 Commands:
@@ -71,9 +69,9 @@ func list() error {
 	}
 
 	files, _ := ioutil.ReadDir(c)
-	fmt.Printf("\nAvalable keys: \n")
+	fmt.Printf("\nAvalable keys:\n\n")
 	for _, f := range files {
-		fmt.Printf("\t%s", f.Name())
+		fmt.Printf("    %s\n", f.Name())
 	}
 	fmt.Println()
 
@@ -254,7 +252,6 @@ func create() error {
 	_ = os.Mkdir(path, 0700)
 
 	return nil
-
 }
 
 func main() {
