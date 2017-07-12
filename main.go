@@ -1,25 +1,3 @@
-/*
-kb is a little command line tool for saving passwords. It calls out to
- keybase to generate ciphertext for your password and saves it in a folder.
-After running
-
-	kb init
-
-this will save your keybase username in $HOME/.kb/username
-and will create a password store in /keybase/private/<your username>/.kb
-
-when you set a key via
-
-	kb set <keyname>
-
-it will prompt you for a password, encrypt it with your public key,
-and save the ciphertext in /keybase/private/<your username>/.kb/<keyname>
-
-	kb get <keyname>
-
-pipes the ciphertext to the keybase cli and returns the plaintext of the
-key value.
-*/
 package main
 
 import (
@@ -37,8 +15,9 @@ import (
 	"golang.org/x/crypto/ssh/terminal"
 )
 
-const (
-	prefix = "/keybase/private/%s/.kb"
+var (
+	home   = os.Getenv("HOME")
+	prefix = fmt.Sprintf("%s/.kb", home)
 )
 
 func menu() {
@@ -73,7 +52,6 @@ func rm(key string) error {
 	if err != nil {
 		return err
 	}
-
 	err = os.Remove(strings.Join([]string{c, "/", key}, ""))
 
 	if err != nil {
@@ -188,13 +166,7 @@ func user() (string, error) {
 }
 
 func credstore() (string, error) {
-	u, err := user()
-
-	if err != nil {
-		return "", err
-	}
-
-	return fmt.Sprintf(prefix, u), nil
+	return prefix, nil
 }
 
 func save(key, val string) error {
@@ -252,6 +224,8 @@ func create() error {
 	reader := bufio.NewReader(os.Stdin)
 	fmt.Print("Keybase username: ")
 	text, _ := reader.ReadString('\n')
+
+	// remove whitespace and newlines
 	f := strings.Trim(strings.Trim(text, "\n"), " ")
 
 	// save user's keybase username in ~/.kb
