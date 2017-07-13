@@ -47,12 +47,7 @@ Example:
 }
 
 func rm(key string) error {
-	c, err := credstore()
-
-	if err != nil {
-		return err
-	}
-	err = os.Remove(strings.Join([]string{c, "/", key}, ""))
+	err := os.Remove(strings.Join([]string{prefix, "/", key}, ""))
 
 	if err != nil {
 		return err
@@ -62,16 +57,13 @@ func rm(key string) error {
 }
 
 func list() error {
-	c, err := credstore()
 
-	if err != nil {
-		return err
-	}
-
-	files, _ := ioutil.ReadDir(c)
+	files, _ := ioutil.ReadDir(prefix)
 	fmt.Printf("\nAvalable keys:\n\n")
 	for _, f := range files {
-		fmt.Printf("    %s\n", f.Name())
+		if f.Name() != "username" {
+			fmt.Printf("    %s\n", f.Name())
+		}
 	}
 	fmt.Println()
 
@@ -111,13 +103,8 @@ func decrypt(b []byte) (string, error) {
 }
 
 func search(s string) error {
-	c, err := credstore()
 
-	if err != nil {
-		return err
-	}
-
-	files, _ := ioutil.ReadDir(c)
+	files, _ := ioutil.ReadDir(prefix)
 	fmt.Printf("\nAvalable keys: \n")
 	for _, f := range files {
 
@@ -170,11 +157,6 @@ func credstore() (string, error) {
 }
 
 func save(key, val string) error {
-	c, err := credstore()
-
-	if err != nil {
-		return err
-	}
 
 	ctxt, err := encrypt(val)
 
@@ -182,7 +164,7 @@ func save(key, val string) error {
 		return err
 	}
 
-	path := strings.Join([]string{c, "/", key}, "")
+	path := strings.Join([]string{prefix, "/", key}, "")
 	err = ioutil.WriteFile(path, ctxt, 0600)
 
 	if err != nil {
@@ -195,13 +177,7 @@ func save(key, val string) error {
 
 func get(key string) (string, error) {
 
-	c, err := credstore()
-
-	if err != nil {
-		return "", err
-	}
-
-	path := strings.Join([]string{c, "/", key}, "")
+	path := strings.Join([]string{prefix, "/", key}, "")
 	b, err := ioutil.ReadFile(path)
 
 	if err != nil {
