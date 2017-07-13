@@ -152,10 +152,6 @@ func user() (string, error) {
 	return string(s), nil
 }
 
-func credstore() (string, error) {
-	return prefix, nil
-}
-
 func save(key, val string) error {
 
 	ctxt, err := encrypt(val)
