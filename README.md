@@ -23,8 +23,16 @@ kb init
   ```text
   kb get github.com
   ```
-You can view the ciphertext in `~/.kb/<keyname>` and decrypt it anytime:
+* list all keys
+  ```text
+  kb ls
+  ```
+* search for the key github
+   ```text
+   kb search github
+   ```
 
+View the ciphertext in `~/.kb/<keyname>` 
 ```text
 $ cat ~/.kb/test
 BEGIN KEYBASE SALTPACK ENCRYPTED MESSAGE. kiOUtMhcc4NXXRb XMxIdgQyljvmpjs wcr3T7EQMTg
