@@ -78,5 +78,4 @@ Example:
 #### Limitations
 Because it uses the keybase cli, it's using the network for decryption.
 I'm fine with this tradeoff because I'm usually accessing something over
-a network when I need to type a password. But your private key is not on your own
-machine.
+a network when I need to type a password. But your private key is not local.
