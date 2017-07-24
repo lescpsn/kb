@@ -73,8 +73,7 @@ func list() error {
 	return nil
 }
 
-// encrypt passes a string to the keybase cli, returning
-// the encrypted ciphertext
+// encrypt passes a string to the keybase cli, returning encrypted bytes
 func encrypt(s string) ([]byte, error) {
 
 	u, err := user()
@@ -93,8 +92,7 @@ func encrypt(s string) ([]byte, error) {
 	return out, nil
 }
 
-// decrypt decrypts ciphertext with the keybase cli,
-// returning the decrypted string
+// decrypt decrypts ciphertext with the keybase cli, returning plaintext
 func decrypt(b []byte) (string, error) {
 
 	msg := fmt.Sprintf("%s", string(b))
@@ -126,8 +124,7 @@ func search(s string) error {
 
 }
 
-// generate creates and saves a 12-character cryptographically
-// random string
+// generate creates and saves a 12-character cryptographicallyrandom string
 func generate(key string) error {
 	c := 12
 	b := make([]byte, c)
