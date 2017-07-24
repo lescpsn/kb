@@ -124,7 +124,7 @@ func search(s string) error {
 
 }
 
-// generate creates and saves a 12-character cryptographicallyrandom string
+// generate creates and saves a 12-character cryptographically random string
 func generate(key string) error {
 	c := 12
 	b := make([]byte, c)
