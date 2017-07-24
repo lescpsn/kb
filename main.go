@@ -20,6 +20,7 @@ var (
 	prefix = fmt.Sprintf("%s/.kb", home)
 )
 
+// menu prints available commands
 func menu() {
 
 	menu := `Usage:
@@ -46,6 +47,7 @@ Example:
 	fmt.Printf(menu)
 }
 
+// rm deletes a key
 func rm(key string) error {
 	err := os.Remove(strings.Join([]string{prefix, "/", key}, ""))
 
@@ -56,6 +58,7 @@ func rm(key string) error {
 	return nil
 }
 
+// list prints all available keys
 func list() error {
 
 	files, _ := ioutil.ReadDir(prefix)
@@ -70,6 +73,8 @@ func list() error {
 	return nil
 }
 
+// encrypt passes a string to the keybase cli, returning
+// the encrypted ciphertext
 func encrypt(s string) ([]byte, error) {
 
 	u, err := user()
@@ -88,6 +93,8 @@ func encrypt(s string) ([]byte, error) {
 	return out, nil
 }
 
+// decrypt decrypts ciphertext with the keybase cli,
+// returning the decrypted string
 func decrypt(b []byte) (string, error) {
 
 	msg := fmt.Sprintf("%s", string(b))
@@ -102,6 +109,7 @@ func decrypt(b []byte) (string, error) {
 	return string(out), nil
 }
 
+// search filters keys by a provided substring
 func search(s string) error {
 
 	files, _ := ioutil.ReadDir(prefix)
@@ -118,6 +126,8 @@ func search(s string) error {
 
 }
 
+// generate creates and saves a 12-character cryptographically
+// random string
 func generate(key string) error {
 	c := 12
 	b := make([]byte, c)
@@ -140,6 +150,7 @@ func generate(key string) error {
 
 }
 
+// user fetches the caller's keybase username
 func user() (string, error) {
 	home := os.Getenv("HOME")
 	u := strings.Join([]string{home, "/.kb/username"}, "")
@@ -152,6 +163,7 @@ func user() (string, error) {
 	return string(s), nil
 }
 
+// save encrypts a value and saves the ciphertext at $HOME/.kb/<key>
 func save(key, val string) error {
 
 	ctxt, err := encrypt(val)
@@ -171,6 +183,7 @@ func save(key, val string) error {
 
 }
 
+// get reads the ciphertext of a key and prints it to the console
 func get(key string) (string, error) {
 
 	path := strings.Join([]string{prefix, "/", key}, "")
@@ -189,6 +202,7 @@ func get(key string) (string, error) {
 	return txt, nil
 }
 
+// create makes a keystore in $HOME/.kb
 func create() error {
 	home := os.Getenv("HOME")
 
