@@ -1,5 +1,6 @@
 
 **kb** is a command line tool for saving passwords with keybase.
+![](./kb.gif)
 
 #### How it works
 
@@ -49,28 +50,3 @@ H7b3gvT qFOrlmsKn323jSd RDkGx9Z903nApeu VpVxpYtigxUvsdl ylHUe. END KEYBASE SALTP
 NCRYPTED MESSAGE.
 ```
 
-#### Full list of options
-```
-$ kb
-
-Usage:
-  kb COMMAND
-
-Commands:
-  init             creates a keystore
-  set <key>        save a key
-  get <key>        loads value of a key
-  generate <key>   generates & saves 12 character
-                   random value for a key
-  search <string>  lists all keys with substring
-  ls               lists all available keys
-  rm <key>         removes a key
-
-Example:
-  - set the key github.com
-      kb set github.com
-
-  - get value of the key github.com
-      kb get github.com
-
-```
