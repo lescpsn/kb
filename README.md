@@ -1,6 +1,5 @@
 
-**kb** is small a command line tool for saving passwords with keybase.
-![](./kb.gif)
+**kb** is small a command line password manager.
 
 #### How it works
 
