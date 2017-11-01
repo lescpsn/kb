@@ -140,8 +140,9 @@ func generate(key string) error {
 	if err != nil {
 		return err
 	}
-
-	fmt.Printf("%s: %s\n", key, val)
+	bold := color.New(color.FgBlack, color.Bold).SprintFunc()
+	cyan := color.New(color.FgCyan).SprintFunc()
+	fmt.Printf("%s: %s\n", bold(key), cyan(val))
 
 	return nil
 
