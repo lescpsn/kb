@@ -63,7 +63,7 @@ func list() error {
 		if f.Name() != "username" && f.Name() != ".git" {
 			d.Printf("%s  ", f.Name())
 			// break every 6 keys
-			if i%6 == 0 {
+			if i%4 == 0 {
 				d.Printf("\n      ")
 			}
 		}
