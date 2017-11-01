@@ -12,6 +12,7 @@ import (
 	"strings"
 	"syscall"
 
+	"github.com/fatih/color"
 	"golang.org/x/crypto/ssh/terminal"
 )
 
@@ -55,13 +56,20 @@ func rm(key string) error {
 func list() error {
 
 	files, _ := ioutil.ReadDir(prefix)
-	for _, f := range files {
+	header := color.New(color.FgBlack, color.Bold)
+	header.Printf("\nKeys: ")
+	d := color.New(color.FgCyan)
+	for i, f := range files {
 		if f.Name() != "username" && f.Name() != ".git" {
-			fmt.Printf("%s  ", f.Name())
+			d.Printf("%s  ", f.Name())
+			// break every 6 keys
+			if i%6 == 0 {
+				d.Printf("\n      ")
+			}
 		}
 	}
 
-	fmt.Println()
+	fmt.Printf("\n\n")
 
 	return nil
 }
@@ -273,8 +281,9 @@ func main() {
 				fmt.Println(err)
 				return
 			}
-
-			fmt.Printf("%s: %s\n", key, val)
+			bold := color.New(color.FgBlack, color.Bold).SprintFunc()
+			cyan := color.New(color.FgCyan).SprintFunc()
+			fmt.Printf("%s: %s\n", bold(key), cyan(val))
 		case "ls":
 
 			err := list()
