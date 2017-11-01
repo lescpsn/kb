@@ -250,8 +250,7 @@ func main() {
 		case "set":
 
 			if len(args) < 2 {
-				fmt.Println("Please provide a key to save.")
-				return
+				log.Fatal("Please provide a key to save.")
 			}
 			fmt.Print("\n\tEnter Value: ")
 			bytePassword, err := terminal.ReadPassword(int(syscall.Stdin))
@@ -272,8 +271,7 @@ func main() {
 
 		case "get":
 			if len(args) < 2 {
-				fmt.Println("Please provide a key to retrieve")
-				return
+				log.Fatal("Please provide a key to retrieve")
 			}
 			key := args[1]
 			val, err := get(key)
@@ -296,8 +294,7 @@ func main() {
 		case "search":
 
 			if len(args) < 2 {
-				fmt.Println("please provide a key to search.")
-				return
+				log.Fatal("please provide a key to search.")
 			}
 
 			err := search(args[1])
