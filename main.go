@@ -20,10 +20,9 @@ var (
 	prefix = fmt.Sprintf("%s/.kb", home)
 )
 
-// menu prints available commands
-func menu() {
-
-	menu := `Usage:
+// usage prints available commands
+func usage() {
+	usage := `Usage:
   kb COMMAND
 
 Commands:
@@ -44,7 +43,8 @@ Example:
       kb get github.com
 `
 
-	fmt.Printf(menu)
+	fmt.Fprintf(os.Stderr, usage)
+	os.Exit(1)
 }
 
 // rm deletes a key
@@ -68,6 +68,7 @@ func list() error {
 			fmt.Printf("    %s\n", f.Name())
 		}
 	}
+
 	fmt.Println()
 
 	return nil
@@ -329,9 +330,9 @@ func main() {
 
 		default:
 
-			menu()
+			usage()
 		}
 	} else {
-		menu()
+		usage()
 	}
 }
