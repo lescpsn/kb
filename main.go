@@ -20,7 +20,7 @@ var (
 	prefix = fmt.Sprintf("%s/.kb", home)
 )
 
-// usage prints available commands
+// usage prints available commands to stderr
 func usage() {
 	usage := `Usage:
   kb COMMAND
@@ -29,18 +29,11 @@ Commands:
   init             creates a keystore
   set <key>        save a key
   get <key>        loads value of a key
-  generate <key>   generates & saves 12 character
+  generate <key>   generates & saves 20 character
                    random value for a key
   search <string>  lists all keys with substring
   ls               lists all available keys
   rm <key>         removes a key
-
-Example:
-  - set the key github.com
-      kb set github.com
-
-  - get value of the key github.com
-      kb get github.com
 `
 
 	fmt.Fprintf(os.Stderr, usage)
@@ -62,10 +55,9 @@ func rm(key string) error {
 func list() error {
 
 	files, _ := ioutil.ReadDir(prefix)
-	fmt.Printf("\nAvalable keys:\n\n")
 	for _, f := range files {
-		if f.Name() != "username" {
-			fmt.Printf("    %s\n", f.Name())
+		if f.Name() != "username" && f.Name() != ".git" {
+			fmt.Printf("%s  ", f.Name())
 		}
 	}
 
@@ -112,11 +104,10 @@ func decrypt(b []byte) (string, error) {
 func search(s string) error {
 
 	files, _ := ioutil.ReadDir(prefix)
-	fmt.Printf("\nAvalable keys: \n")
 	for _, f := range files {
 
 		if strings.Contains(f.Name(), s) {
-			fmt.Printf("\t%s", f.Name())
+			fmt.Printf("%s  ", f.Name())
 		}
 	}
 	fmt.Println()
@@ -125,9 +116,9 @@ func search(s string) error {
 
 }
 
-// generate creates and saves a 12-character cryptographically random string
+// generate creates and saves a 20-character cryptographically random string
 func generate(key string) error {
-	c := 12
+	c := 20
 	b := make([]byte, c)
 	_, err := rand.Read(b)
 	if err != nil {
@@ -142,7 +133,7 @@ func generate(key string) error {
 		return err
 	}
 
-	fmt.Printf("\n\tSaving %s\n", key)
+	fmt.Printf("%s: %s\n", key, val)
 
 	return nil
 
@@ -275,15 +266,15 @@ func main() {
 				fmt.Println("Please provide a key to retrieve")
 				return
 			}
-
-			val, err := get(args[1])
+			key := args[1]
+			val, err := get(key)
 
 			if err != nil {
 				fmt.Println(err)
 				return
 			}
 
-			fmt.Printf("\n\t%s\n", val)
+			fmt.Printf("%s: %s\n", key, val)
 		case "ls":
 
 			err := list()
