@@ -52,7 +52,7 @@ func rm(key string) error {
 	return nil
 }
 
-// list prints all available keys
+// list prints all available keys to stdout
 func list() error {
 
 	files, _ := ioutil.ReadDir(prefix)
