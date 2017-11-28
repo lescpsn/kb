@@ -111,6 +111,7 @@ func decrypt(b []byte) (string, error) {
 // search filters keys by a provided substring
 func search(s string) error {
 
+	// read ~/.kb filenames
 	files, _ := ioutil.ReadDir(prefix)
 	for _, f := range files {
 
