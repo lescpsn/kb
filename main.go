@@ -219,7 +219,7 @@ func create() error {
 	_ = os.Mkdir(dir, 0700)
 
 	file := strings.Join([]string{dir, "/username"}, "")
-
+	//write to file
 	fmt.Println("\n\tWriting keybase username to ~/.kb/username")
 	err := ioutil.WriteFile(file, []byte(f), 0600)
 
