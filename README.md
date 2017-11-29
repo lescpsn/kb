@@ -1,6 +1,5 @@
 
 **kb** is small a command line password manager.
-![](./anim.gif)
 
 #### How it works
 
