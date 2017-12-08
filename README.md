@@ -12,3 +12,19 @@ Install [keybase](https://keybase.io/) and [go](https://golang.org/doc/install).
 go get github.com/kingishb/kb
 kb init
 ```
+#### Usage
+```
+$ kb --help
+Usage:
+  kb COMMAND
+
+Commands:
+  init             creates a keystore
+  set <key>        save a key
+  get <key>        loads value of a key
+  generate <key>   generates & saves 20 character
+                   random value for a key
+  search <string>  lists all keys with substring
+  ls               lists all available keys
+  rm <key>         removes a key
+```
