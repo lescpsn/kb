@@ -1,5 +1,5 @@
 
-**kb** is small a command line password manager.
+a small  command line password manager.
 
 #### How it works
 
